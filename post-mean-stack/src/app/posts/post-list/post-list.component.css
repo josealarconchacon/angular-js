@@ -1,0 +1,35 @@
+.custom-card {
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.styled-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button.mat-raised-button {
+  font-size: 0.875rem;
+  padding: 8px 16px;
+}
+
+.custom-accordion {
+  width: 100%;
+}
+
+.mat-expansion-panel {
+  width: 100%;
+}
+
+.nothing-to-see {
+  font-size: 1.2rem; /* Example: Increase font size */
+  color: #888; /* Example: Change text color */
+  margin-top: 20px; /* Example: Add margin */
+  text-align: center; /* Example: Center align text */
+  font-style: italic; /* Example: Italicize text */
+}

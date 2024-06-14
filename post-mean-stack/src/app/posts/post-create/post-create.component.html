@@ -1,0 +1,30 @@
+<mat-card class="custom-card">
+  <mat-card-content>
+    <mat-form-field appearance="outline" class="styled-form-field">
+      <mat-label>Enter Your Title</mat-label>
+      <input
+        matInput
+        [(ngModel)]="enterTitle"
+        placeholder="Title"
+        class="custom-input"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="styled-form-field">
+      <mat-label>Enter Your Post</mat-label>
+      <textarea
+        matInput
+        rows="6"
+        [(ngModel)]="enterContent"
+        #postInput
+        placeholder="Post"
+      ></textarea>
+    </mat-form-field>
+
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="onAddPost()">
+        Save Post
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
