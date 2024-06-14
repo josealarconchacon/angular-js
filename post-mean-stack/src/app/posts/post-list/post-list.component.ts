@@ -1,11 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { Post } from '../post.model';
+import { PostService } from './../Service/post.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Post } from '../Model/post.model';
 
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css'],
 })
-export class PostListComponent {
+export class PostListComponent implements OnInit {
   @Input() posts: Post[] = [];
+
+  constructor(public postService: PostService) {}
+
+  ngOnInit(): void {}
 }
