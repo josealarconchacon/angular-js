@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Post } from './posts/Model/post.model';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +7,4 @@ import { Post } from './posts/Model/post.model';
 })
 export class AppComponent {
   title = 'post-mean-stack';
-  storedPosts: Post[] = [];
-
-  onPostAdded(post) {
-    this.storedPosts.push(post);
-  }
 }
