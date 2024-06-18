@@ -1,7 +1,6 @@
 import { PostService } from './../Service/post.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-
 import { Post } from '../Model/post.model';
 
 @Component({
@@ -18,14 +17,26 @@ export class PostListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.fetchAllPost();
   }
+
   ngOnDestroy(): void {
-    this.postSubscription.unsubscribe();
+    if (this.postSubscription) {
+      this.postSubscription.unsubscribe();
+    }
   }
 
   fetchAllPost() {
-    this.posts = this.postService.getPost();
-    this.postService.getPostUpdateListener().subscribe((posts: Post[]) => {
-      this.posts = posts;
-    });
+    this.postService.getPost();
+    this.postSubscription = this.postService.getPostUpdateListener().subscribe(
+      (posts: Post[]) => {
+        this.posts = posts;
+        console.log('Fetched posts:', this.posts);
+        if (this.posts.length > 0) {
+          console.log('First post title:', this.posts[0].title);
+        }
+      },
+      (error) => {
+        console.error('Error fetching posts:', error);
+      }
+    );
   }
 }
