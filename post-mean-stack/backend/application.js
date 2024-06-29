@@ -27,7 +27,7 @@ application.post("/api/posts", (req, res, next) => {
   });
 });
 
-application.get("/api/posts", (req, res, next) => {
+application.g("/api/posts", (req, res, next) => {
   const posts = [
     { id: "1", title: "Test Title 1", content: "Test Content 1" },
     { id: "2", title: "Test Title 2", content: "Test Content 2" },
