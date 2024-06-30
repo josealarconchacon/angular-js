@@ -1,14 +1,25 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
-const Post = require("./models/post");
-
+const Post = require("./models/post"); // Assuming you have a Post model
 const application = express();
+
+mongoose
+  .connect(
+    "mongodb+srv://josealarconchacon:rOXIoqJjyOPS8RMJ@postcluster.mqorke1.mongodb.net/node-angular?retryWrites=true&w=majority&appName=PostCluster",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => {
+    console.log("Connected to database");
+  })
+  .catch((err) => {
+    console.error("Connection failed", err);
+  });
 
 application.use(bodyParser.json());
 
 application.use((req, res, next) => {
-  console.log("Request received");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -26,20 +37,26 @@ application.post("/api/posts", (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
   });
-  console.log(post);
-  res.status(201).json({
-    message: "Post added successfully",
+  post.save().then((createdPost) => {
+    res.status(201).json({
+      message: "Post added successfully",
+      postId: createdPost._id,
+    });
   });
 });
 
-application.use("/api/posts", (req, res, next) => {
-  const posts = [
-    { id: "1", title: "Test Title 1", content: "Test Content 1" },
-    { id: "2", title: "Test Title 2", content: "Test Content 2" },
-  ];
-  res.status(200).json({
-    message: "Posts fetched successfully!",
-    posts: posts,
+application.get("/api/posts", (req, res, next) => {
+  Post.find().then((documents) => {
+    res.status(200).json({
+      message: "Posts fetched successfully!",
+      posts: documents,
+    });
+  });
+});
+
+application.delete("/api/posts/:id", (req, res, next) => {
+  Post.deleteOne({ _id: req.params.id }).then((result) => {
+    res.status(200).json({ message: "Post deleted!" });
   });
 });
 

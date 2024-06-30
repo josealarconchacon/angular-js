@@ -16,11 +16,16 @@ export class PostService {
       .get<{ message: string; posts: any[] }>('http://localhost:3000/api/posts')
       .pipe(
         map((postData) => {
+          console.log('Raw API response:', postData); // Log the entire API response
+
           return postData.posts.map((post) => {
+            console.log('Processing post:', post); // Log each individual post object
+
+            // Ensure properties are defined before accessing
             return {
-              title: post.title,
-              content: post.content,
-              id: post._id,
+              title: post.title || '', // Handle undefined or null title
+              content: post.content || '', // Handle undefined or null content
+              id: post._id || '', // Handle undefined or null _id
             };
           });
         })
@@ -48,6 +53,17 @@ export class PostService {
       .subscribe((responseData) => {
         console.log('Response Data', responseData);
         this.posts.push(post);
+        this.postUpdated.next([...this.posts]);
+      });
+  }
+
+  deletePost(postID: string) {
+    this.http
+      .delete('http://localhost:3000/api/posts/' + postID)
+      .subscribe(() => {
+        console.log('Deleted');
+        const updatedPost = this.posts.filter((post) => post.id !== postID);
+        this.posts = updatedPost;
         this.postUpdated.next([...this.posts]);
       });
   }
