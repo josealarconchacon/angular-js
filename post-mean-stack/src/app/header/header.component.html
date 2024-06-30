@@ -1,1 +1,16 @@
-<mat-toolbar color="primary">Messages</mat-toolbar>
+<mat-toolbar color="primary" class="custom-toolbar">
+  <span class="toolbar-title">
+    <a routerLink="/" class="toolbar-link">Messages</a>
+  </span>
+  <ul class="toolbar-menu">
+    <li>
+      <a
+        mat-button
+        routerLink="/create"
+        routerLinkActive="mat-accent"
+        class="toolbar-link"
+        >New Post</a
+      >
+    </li>
+  </ul>
+</mat-toolbar>

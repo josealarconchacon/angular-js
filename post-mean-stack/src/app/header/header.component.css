@@ -1,0 +1,51 @@
+.custom-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.toolbar-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.toolbar-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.toolbar-link:hover {
+  color: #ffcc00; /* Change to your desired hover color */
+}
+
+.toolbar-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.toolbar-menu li {
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 600px) {
+  .custom-toolbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .toolbar-menu {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .toolbar-title {
+    margin-bottom: 10px;
+  }
+}

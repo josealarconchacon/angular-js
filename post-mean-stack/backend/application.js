@@ -6,10 +6,7 @@ const Post = require("./models/post"); // Assuming you have a Post model
 const application = express();
 
 mongoose
-  .connect(
-    "mongodb+srv://josealarconchacon:rOXIoqJjyOPS8RMJ@postcluster.mqorke1.mongodb.net/node-angular?retryWrites=true&w=majority&appName=PostCluster",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect("", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("Connected to database");
   })
