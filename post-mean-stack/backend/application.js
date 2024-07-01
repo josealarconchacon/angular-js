@@ -6,10 +6,7 @@ const Post = require("./models/post"); // Assuming you have a Post model
 const application = express();
 
 mongoose
-  .connect(
-    "mongodb+srv://josealarconchacon:rOXIoqJjyOPS8RMJ@postcluster.mqorke1.mongodb.net/node-angular?retryWrites=true&w=majority&appName=PostCluster",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect("", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("Connected to database");
   })
@@ -27,7 +24,7 @@ application.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
+    "GET, POST, PUT, DELETE, OPTIONS"
   );
   next();
 });
@@ -45,12 +42,33 @@ application.post("/api/posts", (req, res, next) => {
   });
 });
 
+application.put("/api/posts/:id", (req, res, next) => {
+  const post = new Post({
+    _id: req.body.id,
+    title: req.body.title,
+    content: req.body.content,
+  });
+  Post.updateOne({ _id: req.params.id }, post).then((result) => {
+    res.status(200).json({ message: "Post updated!" });
+  });
+});
+
 application.get("/api/posts", (req, res, next) => {
   Post.find().then((documents) => {
     res.status(200).json({
       message: "Posts fetched successfully!",
       posts: documents,
     });
+  });
+});
+
+application.get("/api/posts/:id", (req, res, next) => {
+  Post.findById(req.params.id).then((post) => {
+    if (post) {
+      res.status(200).json(post);
+    } else {
+      res.status(404).json({ message: "Post not found!" });
+    }
   });
 });
 
