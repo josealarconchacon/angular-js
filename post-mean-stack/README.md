@@ -1,6 +1,9 @@
 # PostMeanStack
 
-Web application built using Angular for the front end and a MongoDB, Express, and Node.js (MEAN) stack for the backend, designed to showcase CRUD operations and user authentication. It serves as a comprehensive example of integrating modern web technologies for a seamless and efficient development workflow
+Web application built using Angular for the front end and a MongoDB, Express, and Node.js (MEAN) stack for the backend, designed to showcase CRUD operations and user authentication. It serves as a comprehensive example of integrating modern web technologies for a seamless and efficient development workflow.
+
+![image](https://github.com/josealarconchacon/angular-js/assets/22806662/febcb733-6381-4c92-8c74-257d852a6154)
+
 
 ##
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
