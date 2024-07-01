@@ -6,15 +6,17 @@ Web application built using Angular for the front end and a MongoDB, Express, an
 
 Here are some screenshots of my project:
 
-<table>
-  <tr>
-    <td align="center">![image](https://github.com/josealarconchacon/angular-js/assets/22806662/4e723684-0be0-46f4-a291-93f32a860b11)</td>
-    <td align="center">![image](https://github.com/josealarconchacon/angular-js/assets/22806662/e92ef785-38c6-4006-99c5-a91a808f76bd)</td>
-  </tr>
-  <tr>
-    <td align="center">![image](https://github.com/josealarconchacon/angular-js/assets/22806662/0c492356-9e27-4d1b-b0ef-e7d239e64dfb)</td>
-  </tr>
-</table>
+# Project Screenshots
+
+Here are the screenshots of my project:
+
+<div style="display: flex; justify-content: center;">
+  <img src="https://github.com/josealarconchacon/angular-js/assets/22806662/4e723684-0be0-46f4-a291-93f32a860b11" alt="Screenshot 1" width="250"/>
+  <img src="https://github.com/josealarconchacon/angular-js/assets/22806662/e92ef785-38c6-4006-99c5-a91a808f76bd" alt="Screenshot 2" width="250"/>
+  <img src="https://github.com/josealarconchacon/angular-js/assets/22806662/0c492356-9e27-4d1b-b0ef-e7d239e64dfb" alt="Screenshot 3" width="250"/>
+</div>
+
+
 
 
 ##
