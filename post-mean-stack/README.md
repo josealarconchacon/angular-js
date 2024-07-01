@@ -13,9 +13,8 @@ Here are the screenshots of my project:
 <div style="display: flex; justify-content: center;">
   <img src="https://github.com/josealarconchacon/angular-js/assets/22806662/4e723684-0be0-46f4-a291-93f32a860b11" alt="Screenshot 1" width="250"/>
   <img src="https://github.com/josealarconchacon/angular-js/assets/22806662/e92ef785-38c6-4006-99c5-a91a808f76bd" alt="Screenshot 2" width="250"/>
-  <img src="https://github.com/josealarconchacon/angular-js/assets/22806662/0c492356-9e27-4d1b-b0ef-e7d239e64dfb" alt="Screenshot 3" width="250"/>
+  <img src="https://github.com/josealarconchacon/angular-js/assets/22806662/0c492356-9e27-4d1b-b0ef-e7d239e64dfb](https://github.com/josealarconchacon/angular-js/assets/22806662/c20bcea5-a456-48cd-bbe5-563fe3fce450)" alt="Screenshot 3" width="250"/>
 </div>
-
 
 
 
