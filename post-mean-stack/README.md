@@ -2,7 +2,19 @@
 
 Web application built using Angular for the front end and a MongoDB, Express, and Node.js (MEAN) stack for the backend, designed to showcase CRUD operations and user authentication. It serves as a comprehensive example of integrating modern web technologies for a seamless and efficient development workflow.
 
-![image](https://github.com/josealarconchacon/angular-js/assets/22806662/febcb733-6381-4c92-8c74-257d852a6154)
+# Project Screenshots
+
+Here are some screenshots of my project:
+
+<table>
+  <tr>
+    <td align="center">![image](https://github.com/josealarconchacon/angular-js/assets/22806662/4e723684-0be0-46f4-a291-93f32a860b11)</td>
+    <td align="center">![image](https://github.com/josealarconchacon/angular-js/assets/22806662/e92ef785-38c6-4006-99c5-a91a808f76bd)</td>
+  </tr>
+  <tr>
+    <td align="center">![image](https://github.com/josealarconchacon/angular-js/assets/22806662/0c492356-9e27-4d1b-b0ef-e7d239e64dfb)</td>
+  </tr>
+</table>
 
 
 ##
