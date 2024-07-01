@@ -10,6 +10,7 @@ import { Post } from '../Model/post.model';
 })
 export class PostListComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
+  isPostLoading: boolean = false;
   private postSubscription: Subscription;
 
   constructor(public postService: PostService) {}
@@ -25,9 +26,11 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   fetchAllPost() {
+    this.isPostLoading = true;
     this.postService.getPost();
     this.postSubscription = this.postService.getPostUpdateListener().subscribe(
       (posts: Post[]) => {
+        this.isPostLoading = false;
         this.posts = posts;
         console.log('Fetched posts:', this.posts);
         if (this.posts.length > 0) {

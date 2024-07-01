@@ -1,4 +1,5 @@
-<mat-card class="custom-card">
+<mat-spinner *ngIf="isPostLoading"></mat-spinner>
+<mat-card class="custom-card" *ngIf="!isPostLoading">
   <mat-accordion multi="true" *ngIf="posts.length > 0" class="custom-accordion">
     <mat-expansion-panel *ngFor="let post of posts">
       <mat-expansion-panel-header>

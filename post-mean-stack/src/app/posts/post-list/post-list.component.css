@@ -33,3 +33,6 @@ button.mat-raised-button {
   text-align: center; /* Example: Center align text */
   font-style: italic; /* Example: Italicize text */
 }
+mat-spinner {
+  margin: 0 auto;
+}

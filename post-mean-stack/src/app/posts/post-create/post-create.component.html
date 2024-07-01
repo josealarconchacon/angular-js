@@ -1,12 +1,17 @@
 <mat-card class="custom-card">
-  <form (submit)="onSavePost(postFormValue)" #postFormValue="ngForm">
+  <mat-spinner *ngIf="isPostLoading"></mat-spinner>
+  <form
+    (submit)="onSavePost(postFormValue)"
+    #postFormValue="ngForm"
+    *ngIf="!isPostLoading"
+  >
     <mat-card-content>
       <mat-form-field appearance="outline" class="styled-form-field">
         <mat-label>Enter Your Title</mat-label>
         <input
           matInput
           name="title"
-          [ngModel]="post.title"
+          [ngModel]="post?.title"
           placeholder="Title"
           class="custom-input"
           required=""
@@ -21,7 +26,7 @@
           matInput
           rows="6"
           name="content"
-          [ngModel]="post.content"
+          [ngModel]="post?.content"
           #postInput
           placeholder="Post"
           required=""
