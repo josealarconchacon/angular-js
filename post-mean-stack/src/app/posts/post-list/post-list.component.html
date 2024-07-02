@@ -5,15 +5,24 @@
       <mat-expansion-panel-header>
         {{ post.title }}
       </mat-expansion-panel-header>
-      <p>
-        {{ post.content }}
-      </p>
-      <mat-action-row>
-        <a mat-button [routerLink]="['/edit', post.id]" color="primary">EDIT</a>
-        <button mat-button color="accent" (click)="onDeletePost(post.id)">
-          DELETE
-        </button>
-      </mat-action-row>
+      <div class="post-container">
+        <div class="post-image">
+          <img [src]="post.imagePath" [alt]="post.title" />
+        </div>
+        <div class="post-content">
+          <p>
+            {{ post.content }}
+          </p>
+          <mat-action-row>
+            <a mat-button [routerLink]="['/edit', post.id]" color="primary"
+              >EDIT</a
+            >
+            <button mat-button color="accent" (click)="onDeletePost(post.id)">
+              DELETE
+            </button>
+          </mat-action-row>
+        </div>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 </mat-card>

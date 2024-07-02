@@ -36,3 +36,22 @@ button.mat-raised-button {
 mat-spinner {
   margin: 0 auto;
 }
+
+.post-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.post-image {
+  margin-right: 16px;
+}
+
+.post-image img {
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: cover;
+}
+
+.post-content {
+  flex: 1;
+}
