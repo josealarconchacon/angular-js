@@ -12,11 +12,12 @@ import { Post } from '../Model/post.model';
 export class PostCreateComponent implements OnInit {
   enterTitle: string = '';
   enterContent: string = '';
-  private mode = 'create';
-  private postID: string;
   post: Post;
   isPostLoading: boolean = false;
   form: FormGroup;
+  imagePreview: string | null = null;
+  private mode = 'create';
+  private postID: string;
 
   constructor(public postService: PostService, public route: ActivatedRoute) {}
 
@@ -30,9 +31,8 @@ export class PostCreateComponent implements OnInit {
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)],
       }),
-      content: new FormControl(null, {
-        validators: [Validators.required],
-      }),
+      content: new FormControl(null, { validators: [Validators.required] }),
+      image: new FormControl(null, { validators: [Validators.required] }),
     });
   }
 
@@ -59,6 +59,23 @@ export class PostCreateComponent implements OnInit {
         this.postID = null;
       }
     });
+  }
+
+  onImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const selectFile = input.files[0];
+      this.form.patchValue({ image: selectFile });
+      this.form.get('image').updateValueAndValidity();
+
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        if (typeof fileReader.result === 'string') {
+          this.imagePreview = fileReader.result;
+        }
+      };
+      fileReader.readAsDataURL(selectFile);
+    }
   }
 
   onSavePost() {
