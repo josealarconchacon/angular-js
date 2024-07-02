@@ -14,6 +14,11 @@
 .button-container {
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
+}
+
+.button-container button {
+  margin: 0;
 }
 
 button.mat-raised-button {
@@ -35,4 +40,8 @@ button.mat-raised-button {
 
 mat-spinner {
   margin: auto;
+}
+
+.button-container input[type="file"] {
+  display: none; /* Hide the file input */
 }
