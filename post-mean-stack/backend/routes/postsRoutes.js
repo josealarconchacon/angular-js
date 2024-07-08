@@ -65,7 +65,14 @@ router.put("/:id", upload.single("image"), (req, res, next) => {
 });
 
 router.get("", (req, res, next) => {
-  Post.find().then((documents) => {
+  const pageSizeOptions = +req.query.pageSizeOptions;
+  const currentPageOptions = +req.query.currentPageOptions;
+  const postQuery = Post.find();
+  if (pageSizeOptions && currentPageOptions) {
+    postQuery.skip(pageSizeOptions * (currentPageOptions - 1));
+    postQuery.limit(pageSizeOptions);
+  }
+  postQuery.then((documents) => {
     res.status(200).json({
       message: "Posts fetched successfully!",
       posts: documents,
