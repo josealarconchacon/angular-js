@@ -25,6 +25,15 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
+  <mat-paginator
+    [length]="totalPosts"
+    [pageSize]="postPerPage"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onChangePage($event)"
+    *ngIf="posts.length > 0"
+  ></mat-paginator>
 </mat-card>
 
-<p *ngIf="posts.length <= 0" class="nothing-to-see">Nothing to see!</p>
+<p *ngIf="posts.length <= 0 && !isPostLoading" class="nothing-to-see">
+  Nothing to see!
+</p>

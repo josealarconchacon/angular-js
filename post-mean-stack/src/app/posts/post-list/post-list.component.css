@@ -55,3 +55,7 @@ mat-spinner {
 .post-content {
   flex: 1;
 }
+
+mat-paginator {
+  margin-top: 16px;
+}

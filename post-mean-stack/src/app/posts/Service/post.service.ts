@@ -8,35 +8,44 @@ import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class PostService {
   private posts: Post[] = [];
-  private postUpdated = new Subject<Post[]>();
+  private postUpdated = new Subject<{ posts: Post[]; postCount: number }>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getPost() {
+  getPost(postPerPage: number, currentPage: number) {
+    const queryParams = `?pageSize=${postPerPage}&page=${currentPage}`;
     this.http
-      .get<{ message: string; posts: any[] }>('http://localhost:3000/api/posts')
+      .get<{ message: string; posts: any[]; maxPosts: number }>(
+        'http://localhost:3000/api/posts' + queryParams
+      )
       .pipe(
         map((postData) => {
           console.log('Raw API response:', postData); // Log the entire API response
 
-          return postData.posts.map((post) => {
-            console.log('Processing post:', post); // Log each individual post object
+          return {
+            posts: postData.posts.map((post) => {
+              console.log('Processing post:', post); // Log each individual post object
 
-            // Ensure properties are defined before accessing
-            return {
-              title: post.title || '', // Handle undefined or null title
-              content: post.content || '', // Handle undefined or null content
-              id: post._id || '', // Handle undefined or null _id
-              imagePath: post.imagePath || '', // Handle undefined or null imagePath
-            };
-          });
+              // Ensure properties are defined before accessing
+              return {
+                title: post.title || '', // Handle undefined or null title
+                content: post.content || '', // Handle undefined or null content
+                id: post._id || '', // Handle undefined or null _id
+                imagePath: post.imagePath || '', // Handle undefined or null imagePath
+              };
+            }),
+            maxPosts: postData.maxPosts,
+          };
         })
       )
       .subscribe(
         (postResponsiveData) => {
-          this.posts = postResponsiveData;
+          this.posts = postResponsiveData.posts;
           console.log('Data received from API:', postResponsiveData);
-          this.postUpdated.next([...this.posts]);
+          this.postUpdated.next({
+            posts: [...this.posts],
+            postCount: postResponsiveData.maxPosts,
+          });
         },
         (error) => {
           console.error('Error fetching posts:', error);
@@ -68,29 +77,12 @@ export class PostService {
         postDataOj
       )
       .subscribe((responseData) => {
-        const post: Post = {
-          id: responseData.post.id,
-          title: title,
-          content: content,
-          imagePath: responseData.post.imagePath,
-        };
-        console.log('Response Data', responseData);
-        this.posts.push(post);
-        this.postUpdated.next([...this.posts]);
         this.router.navigate(['/']);
       });
   }
 
   deletePost(postID: string) {
-    this.http
-      .delete('http://localhost:3000/api/posts/' + postID)
-      .subscribe(() => {
-        console.log('Deleted');
-        const updatedPost = this.posts.filter((post) => post.id !== postID);
-        this.posts = updatedPost;
-        this.postUpdated.next([...this.posts]);
-        this.router.navigate(['/']);
-      });
+    return this.http.delete('http://localhost:3000/api/posts/' + postID);
   }
 
   updatePost(id: string, title: string, content: string, image: File | string) {
@@ -111,17 +103,6 @@ export class PostService {
       this.http
         .put('http://localhost:3000/api/posts/' + id, postData)
         .subscribe((response) => {
-          const updatedPost = [...this.posts];
-          const oldPostIndex = updatedPost.findIndex((p) => p.id === id);
-          const post: Post = {
-            id: id,
-            title: title,
-            content: content,
-            imagePath: 'response.imagePath',
-          };
-          updatedPost[oldPostIndex] = post;
-          this.posts = updatedPost;
-          this.postUpdated.next([...this.posts]);
           this.router.navigate(['/']);
         });
     }

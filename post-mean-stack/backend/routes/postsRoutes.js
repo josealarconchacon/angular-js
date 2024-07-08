@@ -65,19 +65,32 @@ router.put("/:id", upload.single("image"), (req, res, next) => {
 });
 
 router.get("", (req, res, next) => {
-  const pageSizeOptions = +req.query.pageSizeOptions;
-  const currentPageOptions = +req.query.currentPageOptions;
+  const pageSize = +req.query.pageSize;
+  const currentPage = +req.query.page;
   const postQuery = Post.find();
-  if (pageSizeOptions && currentPageOptions) {
-    postQuery.skip(pageSizeOptions * (currentPageOptions - 1));
-    postQuery.limit(pageSizeOptions);
+  let fetchedPost;
+  if (pageSize && currentPage) {
+    postQuery.skip(pageSize * (currentPage - 1));
+    postQuery.limit(pageSize);
   }
-  postQuery.then((documents) => {
-    res.status(200).json({
-      message: "Posts fetched successfully!",
-      posts: documents,
+  postQuery
+    .then((documents) => {
+      fetchedPosts = documents;
+      return Post.countDocuments();
+    })
+    .then((count) => {
+      res.status(200).json({
+        message: "Posts fetched successfully!",
+        posts: fetchedPosts,
+        maxPosts: count,
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Fetching posts failed!",
+        error: error,
+      });
     });
-  });
 });
 
 router.get("/:id", (req, res, next) => {
