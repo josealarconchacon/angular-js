@@ -1,0 +1,61 @@
+<div class="login-container">
+  <mat-card class="custom-card">
+    <mat-spinner *ngIf="isPostLoading"></mat-spinner>
+    <form
+      (submit)="onSignUp(signForm)"
+      #signForm="ngForm"
+      *ngIf="!isPostLoading"
+      class="login-form"
+    >
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="styled-form-field">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            name="email"
+            ngModel
+            type="email"
+            placeholder="Enter your email"
+            class="custom-input"
+            #emailInput="ngModel"
+            required
+            email
+          />
+          <mat-error
+            *ngIf="
+              emailInput.invalid && (emailInput.dirty || emailInput.touched)
+            "
+          >
+            Enter a valid email
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="styled-form-field">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            name="password"
+            ngModel
+            type="password"
+            placeholder="Enter your password"
+            class="custom-input"
+            #passwordInput="ngModel"
+            required
+          />
+          <mat-error
+            *ngIf="
+              passwordInput.invalid &&
+              (passwordInput.dirty || passwordInput.touched)
+            "
+          >
+            Enter a valid password
+          </mat-error>
+        </mat-form-field>
+
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit">Login</button>
+        </div>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>
